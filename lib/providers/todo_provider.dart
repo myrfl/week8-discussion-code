@@ -6,9 +6,15 @@
 
 import 'package:flutter/material.dart';
 import '../models/todo_model.dart';
+import '../api/firebase_todo_api.dart';
 
 class TodoListProvider with ChangeNotifier {
-  List<Todo> _todoList = [
+  late FirebaseTodoAPI firebaseService;
+  TodoListProvider() {
+    firebaseService = FirebaseTodoAPI();
+  }
+
+  final List<Todo> _todoList = [
     Todo(
       completed: true,
       userId: 1,
@@ -29,8 +35,9 @@ class TodoListProvider with ChangeNotifier {
   // getter
   List<Todo> get todo => _todoList;
 
-  void addTodo(Todo item) {
-    _todoList.add(item);
+  void addTodo(Todo item) async {
+    String message = await firebaseService.addTodo(item.toJson(item));
+    print(message);
     notifyListeners();
   }
 

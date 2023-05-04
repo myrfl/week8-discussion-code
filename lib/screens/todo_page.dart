@@ -61,7 +61,6 @@ class _TodoPageState extends State<TodoPage> {
                         context: context,
                         builder: (BuildContext context) => TodoModal(
                           type: 'Edit',
-                          todoIndex: index,
                         ),
                       );
                     },
@@ -73,7 +72,6 @@ class _TodoPageState extends State<TodoPage> {
                         context: context,
                         builder: (BuildContext context) => TodoModal(
                           type: 'Delete',
-                          todoIndex: index,
                         ),
                       );
                     },
@@ -91,8 +89,6 @@ class _TodoPageState extends State<TodoPage> {
             context: context,
             builder: (BuildContext context) => TodoModal(
               type: 'Add',
-              todoIndex:
-                  -1, // Flag to identify that this particular modal is for add
             ),
           );
         },

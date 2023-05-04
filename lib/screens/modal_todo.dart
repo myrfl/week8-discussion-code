@@ -11,10 +11,10 @@ import 'package:week7_networking_discussion/providers/todo_provider.dart';
 
 class TodoModal extends StatelessWidget {
   String type;
-  int todoIndex;
+  // int todoIndex;
   TextEditingController _formFieldController = TextEditingController();
 
-  TodoModal({super.key, required this.type, required this.todoIndex});
+  TodoModal({super.key, required this.type});
 
   // Method to show the title of the modal depending on the functionality
   Text _buildTitle() {
@@ -39,7 +39,7 @@ class TodoModal extends StatelessWidget {
       case 'Delete':
         {
           return Text(
-            "Are you sure you want to delete '${todoItems[todoIndex].title}'?",
+            "Are you sure you want to delete ''?",
           );
         }
       // Edit and add will have input field in them
@@ -48,7 +48,7 @@ class TodoModal extends StatelessWidget {
           controller: _formFieldController,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: todoIndex != -1 ? todoItems[todoIndex].title : '',
+            // hintText: todoIndex != -1 ? todoItems[todoIndex].title : '',
           ),
         );
     }
@@ -76,9 +76,8 @@ class TodoModal extends StatelessWidget {
             }
           case 'Edit':
             {
-              context
-                  .read<TodoListProvider>()
-                  .editTodo(todoIndex, _formFieldController.text);
+              context.read<TodoListProvider>();
+              // .editTodo(_formFieldController.text);
 
               // Remove dialog after editing
               Navigator.of(context).pop();
@@ -86,9 +85,8 @@ class TodoModal extends StatelessWidget {
             }
           case 'Delete':
             {
-              context
-                  .read<TodoListProvider>()
-                  .deleteTodo(todoItems[todoIndex].title);
+              context.read<TodoListProvider>();
+              // .deleteTodo(todoItems[todoIndex].title);
 
               // Remove dialog after editing
               Navigator.of(context).pop();
