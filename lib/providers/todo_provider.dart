@@ -7,11 +7,22 @@
 import 'package:flutter/material.dart';
 import '../models/todo_model.dart';
 import '../api/firebase_todo_api.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TodoListProvider with ChangeNotifier {
   late FirebaseTodoAPI firebaseService;
+  late Stream<QuerySnapshot> _todosStream;
+
   TodoListProvider() {
     firebaseService = FirebaseTodoAPI();
+    fetchTodos();
+  }
+
+  Stream<QuerySnapshot> get todos => _todosStream;
+
+  fetchTodos() {
+    _todosStream = firebaseService.getAllTodos();
+    notifyListeners();
   }
 
   final List<Todo> _todoList = [
