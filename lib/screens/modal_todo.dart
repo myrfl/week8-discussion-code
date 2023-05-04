@@ -11,11 +11,12 @@ import 'package:week7_networking_discussion/providers/todo_provider.dart';
 
 class TodoModal extends StatelessWidget {
   String type;
+  Todo? item;
+
   // int todoIndex;
   TextEditingController _formFieldController = TextEditingController();
 
-  TodoModal({super.key, required this.type});
-
+  TodoModal({super.key, required this.type, this.item});
   // Method to show the title of the modal depending on the functionality
   Text _buildTitle() {
     switch (type) {
@@ -85,8 +86,7 @@ class TodoModal extends StatelessWidget {
             }
           case 'Delete':
             {
-              context.read<TodoListProvider>();
-              // .deleteTodo(todoItems[todoIndex].title);
+              context.read<TodoListProvider>().deleteTodo(item!.id!);
 
               // Remove dialog after editing
               Navigator.of(context).pop();

@@ -16,4 +16,14 @@ class FirebaseTodoAPI {
   Stream<QuerySnapshot> getAllTodos() {
     return db.collection("todos").snapshots();
   }
+
+  Future<String> deleteTodo(String? id) async {
+    try {
+      await db.collection("todos").doc(id).delete();
+
+      return "Successfully deleted todo!";
+    } on FirebaseException catch (e) {
+      return "Failed with error '${e.code}: ${e.message}";
+    }
+  }
 }

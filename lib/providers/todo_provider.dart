@@ -57,12 +57,9 @@ class TodoListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteTodo(String title) {
-    for (int i = 0; i < _todoList.length; i++) {
-      if (_todoList[i].title == title) {
-        _todoList.remove(_todoList[i]);
-      }
-    }
+  void deleteTodo(String id) async {
+    String message = await firebaseService.deleteTodo(id);
+    print(message);
     notifyListeners();
   }
 
